@@ -22,6 +22,16 @@ Unfortunately, you must rebuild libmbedos and place it into the variants/<actual
 folder. It is also useful to copy over mbed-config.h so that the compiler knows if anything had
 changed. I simply used the copy of mbed OS that was bundled with the board support package.
 (submodule mbed-os-ambiq-apollo3).
+  
+### Stumbling blocks for rebuilding libembedos
+* Depending on your application, you may want to increase the main thread stack size from 4096
+  to something larger.
+* You generally should use the same compiler version that Arduino uses. (in fact, you can, and
+  probably should, use
+  that same compiler!) I found this out when successfully building mbed-os with GCC 7.3.1 when
+  Arduino used GCC 8.2.1. One symptom is that the board immediately hardfaults. (you may see a
+  builtin LED blink SOS, but you might not have Serial debugging) At the time, I followed these
+  instructions. [https://os.mbed.com/docs/mbed-os/v6.15/build-tools/install-and-set-up.html](https://os.mbed.com/docs/mbed-os/v6.15/build-tools/install-and-set-up.html)
 
 ## TransferIn and TransferOut functions
 You can modify the Arduino SPI library to provide TransferIn and TransferOut functions that
